@@ -1,0 +1,14 @@
+#!ipxe
+
+dhcp
+
+echo Starting Ubuntu x64 installer for ${hostname}
+
+set base-url http://archive.ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/current/images/netboot/ubuntu-installer/amd64
+kernel ${base-url}/linux
+initrd ${base-url}/initrd.gz
+
+#                       initrd needed in UEFI virtualbox atleast
+imgargs linux auto=true initrd=initrd.gz ks=http://192.168.1.116:8000/kickstart.cfg
+
+boot
